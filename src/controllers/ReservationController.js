@@ -19,38 +19,52 @@ const makeReservation = (req, res) => {
             }
 
             else {
-                let rocket = await Rocket.findOne({ _id: idRocket });
                 let userData = await User.findOne({ _id });
+                let rocketData = await Rocket.findOne({ _id: idRocket });
 
-                if (rocket.price > userData.balance) {
+                if (rocketData.price > userData.balance) {
                     return res.send({ message: "insufficient funds", error: true });
                 }
-                else {
+                if (rocketData.accents == 0) {
+                    return res.send({ message: "insufficient funds no more accents available", error: true });
+                }
+                else if (rocketData && rocketData) {
+                    
                     let user = await User
                         .update(
                             { _id },
                             {
                                 $set: {
-                                    balance: userData.balance - rocket.price
+                                    balance: userData.balance - rocketData.price
                                 }
                             }
                         );
 
-                    if(user){
+                    let rocket = await Rocket
+                        .update(
+                            { _id: idRocket },
+                            {
+                                $inc: {
+                                    accents: -1
+                                }
+                            }
+                        );
+
+                    if (user && rocket) {
                         let makeRes = await Reservation.create({
                             date,
                             user: _id,
                             rocket: idRocket
                         });
-    
-                        if(makeRes) {
+
+                        if (makeRes) {
                             return res.send({ message: "reservation successful", error: false });
                         }
-                        else{
+                        else {
                             return res.send({ message: "error when booking", error: true });
                         }
                     }
-                    else{
+                    else {
                         return res.send({ message: "error when booking", error: true });
                     }
                 }
@@ -68,12 +82,35 @@ const makeReservation = (req, res) => {
 const cancel = (req, res) => {
     jwt.verify(req.token, 'rocket', async (err, data) => {
         if (data) {
+            const { _id } = data.user;
             const { id } = req.params;
-
+            
+            let reserv = await Reservation.findOne({ _id: id });
             let reservation = await Reservation.remove({ _id: id });
 
-            if (reservation) {
-                return res.send({ message: "reservation canceled successfully", error: false })
+            if (reservation.deletedCount == 1) {
+                let user = await User
+                    .update(
+                        { _id },
+                        {
+                            $set: {
+                                balance: 500.00
+                            }
+                        }
+                    );
+
+                let rocket = await Rocket
+                    .update(
+                        { _id: reserv.rocket },
+                        {
+                            $inc: {
+                                accents: 1
+                            }
+                        }
+                    );
+                if (user && rocket) {
+                    return res.send({ message: "reservation canceled successfully", error: false })
+                }
             }
             else {
                 return res.send({ message: "error canceling reservation", error: true })
@@ -91,10 +128,10 @@ const getReservation = (req, res) => {
             const { _id } = data.user;
 
             let reservation = await Reservation.aggregate([
-                { $match: { user: ObjectId(_id) }},
+                { $match: { user: ObjectId(_id) } },
                 {
-                    $lookup : {
-                        from : Rocket.collection.name,
+                    $lookup: {
+                        from: Rocket.collection.name,
                         localField: "rocket",
                         foreignField: "_id",
                         as: "rocket_info"
@@ -103,7 +140,7 @@ const getReservation = (req, res) => {
             ]);
 
             if (reservation) {
-                return res.send(reservation[0]);
+                return res.send(reservation);
             }
             else {
                 return res.send({ message: "error when querying reservations", error: true })

@@ -92,17 +92,10 @@ routes.get(
 );
 
 routes.delete(
-    '/rocketInterplanet/reservation/cancel',
+    '/rocketInterplanet/reservation/cancel/:id',
     Authentication.verifyToken,
     Reservation.cancel
 );
-
-
-
-
-
-
-
 
 
 module.exports = routes;
