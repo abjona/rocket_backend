@@ -1,6 +1,6 @@
 /**
- * Simple Inventory API
- * This is a simple API
+ * Rocket Interplanet API
+ * Rocket api
  *
  * OpenAPI spec version: 1.0.0
  * Contact: abjonathan@hotmail.com
