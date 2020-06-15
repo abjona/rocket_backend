@@ -1,0 +1,759 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Rocket Interplanet API",
+    "description" : "Rocket api",
+    "contact" : {
+      "email" : "abjonathan@hotmail.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "1.0.0-oas3"
+  },
+  "servers" : [ {
+    "url" : "https://rocket2020.herokuapp.com/rocketInterplanet"
+  } ],
+  "paths" : {
+    "/store" : {
+      "post" : {
+        "tags" : [ "User" ],
+        "summary" : "store user or admin",
+        "description" : "store user or admin",
+        "requestBody" : {
+          "description" : "user info",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "result",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "result",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_409"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login" : {
+      "post" : {
+        "tags" : [ "User" ],
+        "summary" : "login users",
+        "description" : "login users",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "result",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "result",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_404"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/company/store" : {
+      "post" : {
+        "tags" : [ "Company" ],
+        "summary" : "store company",
+        "description" : "store company",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_1"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "result",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Bearer" : [ ]
+        } ]
+      }
+    },
+    "/company/get" : {
+      "get" : {
+        "tags" : [ "Company" ],
+        "summary" : "get companies",
+        "description" : "get companies",
+        "responses" : {
+          "200" : {
+            "description" : "list companies",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Company"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Bearer" : [ ]
+        } ]
+      }
+    },
+    "/company/update" : {
+      "put" : {
+        "tags" : [ "Company" ],
+        "summary" : "update company",
+        "description" : "update company",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_2"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "result",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_3"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Bearer" : [ ]
+        } ]
+      }
+    },
+    "/company/available" : {
+      "post" : {
+        "tags" : [ "Company" ],
+        "summary" : "available company",
+        "description" : "available company",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_3"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "result",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_4"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Bearer" : [ ]
+        } ]
+      }
+    },
+    "/rocket/store" : {
+      "post" : {
+        "tags" : [ "Rocket" ],
+        "summary" : "store rocket",
+        "description" : "store rocket",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Rocket"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "result",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_4"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Bearer" : [ ]
+        } ]
+      }
+    },
+    "/rocket/getAll" : {
+      "get" : {
+        "tags" : [ "Rocket" ],
+        "summary" : "get all rockets",
+        "description" : "get all rockets",
+        "responses" : {
+          "200" : {
+            "description" : "result",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_5"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Bearer" : [ ]
+        } ]
+      }
+    },
+    "/rocket/{companyId}" : {
+      "get" : {
+        "tags" : [ "Rocket" ],
+        "summary" : "get rockets company",
+        "description" : "get rockets company",
+        "parameters" : [ {
+          "name" : "companyId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "result",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_5"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Bearer" : [ ]
+        } ]
+      }
+    },
+    "/rocket/update" : {
+      "put" : {
+        "tags" : [ "Rocket" ],
+        "summary" : "update rocket",
+        "description" : "update rocket",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Rocket"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "result",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_6"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Bearer" : [ ]
+        } ]
+      }
+    },
+    "/reservation/makeReservation" : {
+      "post" : {
+        "tags" : [ "Reservation" ],
+        "summary" : "make reservation",
+        "description" : "make reservation",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_4"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "result",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_7"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Bearer" : [ ]
+        } ]
+      }
+    },
+    "/reservation/get" : {
+      "get" : {
+        "tags" : [ "Reservation" ],
+        "summary" : "get reservation",
+        "description" : "get reservation",
+        "responses" : {
+          "200" : {
+            "description" : "reservation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_8"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Bearer" : [ ]
+        } ]
+      }
+    },
+    "/reservation/cancel/{id}" : {
+      "delete" : {
+        "tags" : [ "Reservation" ],
+        "summary" : "cancel reservation",
+        "description" : "cancel reservation",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "result",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_9"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Bearer" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "User" : {
+        "required" : [ "email", "name", "password", "type" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "example" : "foobar"
+          },
+          "email" : {
+            "type" : "string",
+            "example" : "foobar@gmail.com"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Company" : {
+        "required" : [ "name" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "example" : "rocket comp"
+          },
+          "_id" : {
+            "type" : "string",
+            "example" : "5ee26d872c4e824ca"
+          },
+          "rating" : {
+            "uniqueItems" : true,
+            "type" : "integer"
+          }
+        }
+      },
+      "Rocket" : {
+        "required" : [ "accents", "company", "dates", "name", "price" ],
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "example" : "R01"
+          },
+          "price" : {
+            "type" : "number",
+            "example" : 50.8
+          },
+          "dates" : {
+            "type" : "array",
+            "example" : [ "2023-07-21", "2023-07-22" ],
+            "items" : { }
+          },
+          "accents" : {
+            "type" : "integer",
+            "example" : 55
+          },
+          "company" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "successful registration"
+          },
+          "error" : {
+            "type" : "boolean",
+            "example" : false
+          }
+        }
+      },
+      "inline_response_409" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "e-mail already registered"
+          },
+          "error" : {
+            "type" : "boolean",
+            "example" : true
+          }
+        }
+      },
+      "body" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string",
+            "example" : "foobar@gmail.com"
+          },
+          "password" : {
+            "type" : "string",
+            "example" : "password"
+          }
+        }
+      },
+      "inline_response_200_1" : {
+        "type" : "object",
+        "properties" : {
+          "user" : {
+            "$ref" : "#/components/schemas/inline_response_200_1_user"
+          },
+          "token" : {
+            "type" : "string",
+            "example" : "e1hji192"
+          }
+        }
+      },
+      "inline_response_404" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "user not found"
+          },
+          "error" : {
+            "type" : "boolean",
+            "example" : true
+          }
+        }
+      },
+      "body_1" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "example" : "rocket comp"
+          }
+        }
+      },
+      "inline_response_200_2" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "company successfully added"
+          },
+          "error" : {
+            "type" : "boolean",
+            "example" : false
+          }
+        }
+      },
+      "body_2" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "example" : "rocket comp"
+          },
+          "_id" : {
+            "type" : "string",
+            "example" : "5ee275f067a33b34e8d636ef"
+          }
+        }
+      },
+      "inline_response_200_3" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "company successfully edited"
+          },
+          "error" : {
+            "type" : "boolean",
+            "example" : false
+          }
+        }
+      },
+      "body_3" : {
+        "type" : "object",
+        "properties" : {
+          "idCompany" : {
+            "type" : "string",
+            "example" : "5ee275f067a33b34e8d636ef"
+          },
+          "available" : {
+            "type" : "number",
+            "description" : "0 to 5",
+            "example" : 5
+          }
+        }
+      },
+      "inline_response_200_4" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "company successfully available"
+          },
+          "error" : {
+            "type" : "boolean",
+            "example" : false
+          }
+        }
+      },
+      "inline_response_200_5" : {
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "example" : "rocket comp"
+          },
+          "_id" : {
+            "type" : "string",
+            "example" : "5ee275f067a33b34e8d636ef"
+          },
+          "rating" : {
+            "uniqueItems" : true,
+            "type" : "integer"
+          },
+          "company_info" : {
+            "type" : "object",
+            "example" : [ {
+              "_id" : "5ee275f067a33b34e8d636ef",
+              "rating" : [ 0, 2 ],
+              "name" : "rocket comp"
+            } ]
+          }
+        }
+      },
+      "inline_response_200_6" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "rocket successfully edited"
+          },
+          "error" : {
+            "type" : "boolean",
+            "example" : false
+          }
+        }
+      },
+      "body_4" : {
+        "type" : "object",
+        "properties" : {
+          "date" : {
+            "type" : "string",
+            "example" : "2023-07-07"
+          },
+          "idRocket" : {
+            "type" : "string",
+            "example" : "5ee275f067a33b34e8d636ef"
+          }
+        }
+      },
+      "inline_response_200_7" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "reservation successful"
+          },
+          "error" : {
+            "type" : "boolean",
+            "example" : false
+          }
+        }
+      },
+      "inline_response_200_8" : {
+        "type" : "object",
+        "properties" : {
+          "_id" : {
+            "type" : "string",
+            "example" : "fwefwfwe"
+          },
+          "date" : {
+            "type" : "string",
+            "example" : "2023-07-07"
+          },
+          "price" : {
+            "type" : "string",
+            "example" : "55.5"
+          },
+          "user" : {
+            "type" : "string",
+            "example" : "5ee275f067a33b34e8d636111"
+          },
+          "rocket" : {
+            "type" : "string",
+            "example" : "5ee275f067a33b34e8d636112"
+          },
+          "rate" : {
+            "type" : "boolean",
+            "example" : false
+          },
+          "rocket_info" : {
+            "type" : "object",
+            "example" : [ {
+              "_id" : "5ee275f067a33b34e8d636ef",
+              "model" : "rc01",
+              "price" : 55.5,
+              "accents" : 4,
+              "company" : "5ee275f067a33b34e8d63633",
+              "dates" : [ "2020-05-05" ]
+            } ]
+          }
+        }
+      },
+      "inline_response_200_9" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "reservation canceled successfully"
+          },
+          "error" : {
+            "type" : "boolean",
+            "example" : false
+          }
+        }
+      },
+      "inline_response_200_1_user" : {
+        "type" : "object",
+        "properties" : {
+          "_id" : {
+            "type" : "string",
+            "example" : "13182jjd8nd238d3"
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "foobar"
+          },
+          "email" : {
+            "type" : "string",
+            "example" : "admin"
+          },
+          "balance" : {
+            "type" : "number",
+            "example" : 500
+          }
+        }
+      }
+    },
+    "requestBodies" : {
+      "Rocket" : {
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/Rocket"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "Bearer" : {
+        "type" : "apiKey",
+        "name" : "Authorization",
+        "in" : "header"
+      }
+    }
+  }
+}
