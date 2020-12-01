@@ -30,7 +30,7 @@ npm
 npm install
 ```
 
-execute
+## Execute
 
 ```bash
 yarn dev
