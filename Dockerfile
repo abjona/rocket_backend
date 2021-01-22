@@ -1,5 +1,5 @@
 # from base image node
-FROM node:8.11-slim
+FROM node:alpine
 
 ENV PORT 3000
 ENV MONGO_URL mongodb+srv://ramses:88812271jona@cluster0-kfag5.mongodb.net/rocketPlanet?retryWrites=true&w=majority
@@ -7,7 +7,7 @@ RUN mkdir -p /usr/app
 WORKDIR /usr/app
 
 # copying all the files from your file system to container file system
-COPY package.json .
+COPY package*.json ./
 
 # install all dependencies
 RUN npm install
@@ -16,7 +16,7 @@ RUN npm install
 COPY ./ .
 
 #expose the port
-EXPOSE 3070
+EXPOSE 3000
 
 # command to run when intantiate an image
 CMD ["npm","start"]
